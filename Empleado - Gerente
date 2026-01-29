@@ -1,0 +1,25 @@
+class Empleado:
+    def __init__(self, nombre, puesto, salario):
+        self.nombre = nombre
+        self.puesto = puesto
+        self.salario = salario
+
+    def mostrar_info(self):
+        return f"{self.nombre} trabaja como {self.puesto} y gana {self.salario}€."
+
+class Gerente(Empleado):
+    def __init__(self, nombre, puesto, salario, empleados_a_cargo):
+        super().__init__(nombre, puesto, salario)
+        self.empleados_a_cargo = empleados_a_cargo
+
+    def mostrar_info(self):
+        return f"{super().mostrar_info()} Supervisa a {self.empleados_a_cargo} empleados."
+
+emp1 = Empleado("Ana", "Desarrolladora", 2800)
+ger1 = Gerente("Luis", "Gerente de IT", 4000, 5)
+
+print(emp1.mostrar_info())
+print(ger1.mostrar_info())
+
+Ana trabaja como Desarrolladora y gana 2800€.
+Luis trabaja como Gerente de IT y gana 4000€. Supervisa a 5 empleados.
