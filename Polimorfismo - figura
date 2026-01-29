@@ -1,0 +1,38 @@
+class Figura:
+    def calcular_area(self):
+        raise NotImplementedError("Este método debe ser implementado por las subclases.")
+
+class Cuadrado(Figura):
+    def __init__(self, lado):
+        self.lado = lado
+
+    def calcular_area(self):
+        return self.lado ** 2
+
+class Círculo(Figura):
+    def __init__(self, radio):
+        self.radio = radio
+
+    def calcular_area(self):
+        return 3.1416 * self.radio ** 2
+
+class Triángulo(Figura):
+    def __init__(self, base, altura):
+        self.base = base
+        self.altura = altura
+
+    def calcular_area(self):
+        return (self.base * self.altura) / 2
+
+figuras = [
+    Cuadrado(4),
+    Círculo(3),
+    Triángulo(6, 2)
+]
+
+for figura in figuras:
+    print(f"Área: {figura.calcular_area()}")
+
+Área: 16
+Área: 28.2744
+Área: 6.0
