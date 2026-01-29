@@ -1,0 +1,24 @@
+class Autor:
+    def __init__(self, nombre, nacionalidad):
+        self.nombre = nombre
+        self.nacionalidad = nacionalidad
+
+    def obtener_info(self):
+        return f"{self.nombre} ({self.nacionalidad})"
+
+class Libro:
+    def __init__(self, titulo, autor):
+        self.titulo = titulo
+        self.autor = autor  # Esto será un objeto de tipo Autor
+
+    def mostrar_info(self):
+        return f"'{self.titulo}', escrito por {self.autor.obtener_info()}"
+
+
+autor1 = Autor("Isabel Allende", "Chile")
+libro1 = Libro("La casa de los espíritus", autor1)
+
+print(libro1.mostrar_info())
+
+
+'La casa de los espíritus', escrito por Isabel Allende (Chile)
