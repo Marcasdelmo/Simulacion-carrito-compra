@@ -1,0 +1,38 @@
+class Vehiculo:
+    def conducir(self):
+        raise NotImplementedError("Este método debe ser implementado por las subclases.")
+
+class Coche(Vehiculo):
+    def conducir(self):
+        return "Conduciendo un coche."
+
+class Moto(Vehiculo):
+    def conducir(self):
+        return "Conduciendo una moto."
+
+class Camión(Vehiculo):
+    def conducir(self):
+        return "Conduciendo un camión."
+
+class FabricaVehiculos:
+    @staticmethod
+    def crear_vehiculo(tipo):
+        tipo = tipo.lower()
+        if tipo == "coche":
+            return Coche()
+        elif tipo == "moto":
+            return Moto()
+        elif tipo == "camión" or tipo == "camion":
+            return Camión()
+        else:
+            raise ValueError("Tipo de vehículo no reconocido.")
+
+tipos = ["Coche", "Moto", "Camión"]
+for tipo in tipos:
+    vehiculo = FabricaVehiculos.crear_vehiculo(tipo)
+    print(vehiculo.conducir())
+
+Conduciendo un coche.
+Conduciendo una moto.
+Conduciendo un camión.
+
