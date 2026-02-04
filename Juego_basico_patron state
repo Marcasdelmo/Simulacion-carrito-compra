@@ -1,0 +1,31 @@
+class Estado:
+    def actuar(self, jugador):
+        raise NotImplementedError("Este método debe ser implementado por las subclases.")
+
+class EstadoNormal(Estado):
+    def actuar(self, jugador):
+        return f"{jugador.nombre} ataca normalmente."
+
+class EstadoEnvenenado(Estado):
+    def actuar(self, jugador):
+        return f"{jugador.nombre} está envenenado y pierde turno."
+
+class EstadoSuperpoder(Estado):
+    def actuar(self, jugador):
+        return f"{jugador.nombre} ataca con SUPER PODER 💥"
+
+
+class Jugador:
+    def __init__(self, nombre):
+        self.nombre = nombre
+        self.estado = EstadoNormal()  # Estado por defecto
+
+    def cambiar_estado(self, nuevo_estado):
+        self.estado = nuevo_estado
+
+    def realizar_accion(self):
+        return self.estado.actuar(self)
+
+Pablo ataca normalmente.
+Pablo está envenenado y pierde turno.
+Pablo ataca con SUPER PODER 💥
