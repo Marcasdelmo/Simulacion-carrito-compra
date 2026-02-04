@@ -1,0 +1,65 @@
+class Libro:
+    def __init__(self, titulo, autor, disponible=True):
+        self.titulo = titulo
+        self.autor = autor
+        self.disponible = disponible
+
+    def __str__(self):
+        estado = "Disponible" if self.disponible else "Prestado"
+        return f"'{self.titulo}' de {self.autor} — {estado}"
+class Usuario:
+    def __init__(self, nombre):
+        self.nombre = nombre
+        self.prestamos = []
+
+    def __str__(self):
+        return self.nombre
+
+class Prestamo:
+    def __init__(self, libro, usuario):
+        self.libro = libro
+        self.usuario = usuario
+
+    def __str__(self):
+        return f"{self.usuario} tiene prestado: {self.libro.titulo}"
+
+class SistemaBiblioteca:
+    _instancia = None
+
+    def __new__(cls):
+        if cls._instancia is None:
+            cls._instancia = super().__new__(cls)
+            cls._instancia.libros = []
+            cls._instancia.prestamos = []
+        return cls._instancia
+
+    def agregar_libro(self, libro):
+        self.libros.append(libro)
+
+    def prestar_libro(self, titulo, usuario):
+        for libro in self.libros:
+            if libro.titulo == titulo and libro.disponible:
+                libro.disponible = False
+                prestamo = Prestamo(libro, usuario)
+                self.prestamos.append(prestamo)
+                usuario.prestamos.append(prestamo)
+                return f"Libro '{titulo}' prestado a {usuario.nombre}"
+        return "Libro no disponible"
+
+    def mostrar_prestamos(self):
+        for p in self.prestamos:
+            print(p)
+
+# Instancias
+sistema = SistemaBiblioteca()
+usuario1 = Usuario("Marina")
+
+# Agregar libros
+sistema.agregar_libro(Libro("1984", "George Orwell"))
+sistema.agregar_libro(Libro("El Principito", "Antoine de Saint-Exupéry"))
+
+# Realizar préstamo
+print(sistema.prestar_libro("1984", usuario1))  # Libro '1984' prestado a Marina
+
+# Mostrar préstamos
+sistema.mostrar_prestamos()
